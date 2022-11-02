@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+Create/Update User
+{% endblock %}
+
+{% block content %}
+    <div class="col">
+        <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input class='btn btn-outline-primary' type="submit" value="Submit">
+        <a class='btn btn-outline-success' href="{% url 'user:list' %}">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

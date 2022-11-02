@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Welcome
+{% endblock %}
+
+{% block content %}
+  {% if user.is_authenticated and user.is_superuser%}
+<div class="row">
+  <table class="table-success  table table-striped">
+    <thead>
+      <th>Username</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Date Joined</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </thead>
+    <tbody>
+    {% for user in object_list %}
+    <tr>
+      <td>{{user.username}}</td>
+      <td>{{user.first_name}}</td>
+      <td>{{user.last_name}}</td>
+      <td>{{user.date_joined}}</td>
+      <td><a class="btn btn-outline-primary" href="{% url 'user:update' user.pk %}"><i class="bi bi-pencil-fill"></a></td>
+      <td><a class="btn btn-outline-danger" href="{% url 'user:delete' user.pk %}"><i class="bi bi-trash3-fill"></a></td>
+      <br>
+    </tr>
+    </tbody>
+    {% endfor %}
+  </table>
+  {% endif %}
+</div>
+{% endblock %}

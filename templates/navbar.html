@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg  sticky-top" style="background-color: #EAFAF1 ">
+  <div class="container-fluid">
+    {% if not user.is_authenticated %}
+  <div>
+    Please Login to proceed
+  </div>
+  {% endif %}
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if user.is_authenticated and user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'user:detail' user.pk %}">Main Page</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Users
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'user:list' %}">List of users</a></li>
+            <li><a class="dropdown-item" href="{% url 'user:create' %}">Create (Manually)</a></li>
+            <li><a class="dropdown-item" href="{% url 'user:upload' %}">Create (Upload files)</a></li>
+            <li><a class="dropdown-item" href="{% url 'user:export-csv' %}">Export to CSV</a></li>
+          </ul>
+        </li>
+        {% endif %}
+        </ul>
+    <form class="form-inline my-2 my-lg-0">
+        {% if user.is_authenticated %}
+        <div class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'accounts:logout' %}"><button class="btn btn-info  btn-block" type="button">Logout</button></a>
+        </div>
+        {% endif %}
+        {% if not user.is_authenticated %}
+        <div class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'accounts:login' %}"><button class="btn btn-info  btn-block" type="button">Login</button></a>
+        </div>
+        {% endif %}
+    </form>
+  </div>
+</nav>
+    </div>
+  </div>
+</nav>
